@@ -7,73 +7,72 @@
 <style>
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #ff9a3c 50%, #4aa3ff 50%);
-  overflow-x: hidden;
+  background: linear-gradient(to bottom, #f28c28 50%, #1e90ff 50%);
+  overflow: hidden;
 }
 
+/* 中線 */
 body::before {
   content: "";
   position: fixed;
   top: 50%;
-  left: 0;
   width: 100%;
-  height: 5px;
+  height: 6px;
   background: white;
   z-index: -1;
 }
 
-/* 排球動畫 */
-.ball {
+/* 球網 */
+.net {
   position: fixed;
-  width: 400px;
-  bottom: 0;
-  left: 0;
-  animation: moveBall 6s linear infinite;
-  opacity: 0.8;
+  top: 50%;
+  width: 100%;
+  height: 60px;
+  background: repeating-linear-gradient(
+    to right,
+    white,
+    white 5px,
+    transparent 5px,
+    transparent 15px
+  );
+  opacity: 0.7;
   z-index: -1;
 }
 
-.ball2 {
-  animation-delay: 3s;
+/* 排球 */
+.ball {
+  position: fixed;
+  width: 80px;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+  transition: all 0.8s ease-out;
 }
 
-/* 動畫軌跡 */
-@keyframes moveBall {
-  0% {
-    left: 0;
-    bottom: 0;
-  }
-  25% {
-    bottom: 200px;
-  }
-  50% {
-    left: 50%;
-    bottom: 0;
-  }
-  75% {
-    bottom: 200px;
-  }
-  100% {
-    left: 100%;
-    bottom: 0;
-  }
+/* 旋轉 */
+.spin {
+  animation: spin 0.5s linear;
 }
 
-/* 表格樣式 */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 表格 */
 table {
   border-collapse: collapse;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.8); /* 半透明 */
+  background-color: rgba(255,255,255,0.85);
 }
 
 th, td {
   border: 1px solid black;
   padding: 15px;
-  text-align: left;
 }
 
-/* 圖片 */
-img.profile {
+/* 個人圖片 */
+.profile {
   float: right;
   width: 240px;
   height: 360px;
@@ -84,19 +83,19 @@ img.profile {
 
 <body>
 
-<!-- 會動的排球 -->
-<img src="volleyball.png" class="ball">
-<img src="volleyball.png" class="ball ball2">
+<div class="net"></div>
+
+<img src="volleyball.png" id="ball" class="ball">
 
 <h1>這是陳衡毅熊男</h1>
 
 <a href="https://www.instagram.com/chy._0517/?utm_source=ig_web_button_share_sheet" target="_blank">
-Instagram帳號
+點我前往 Instagram帳號
 </a>
 
 <br><br>
 
-<img src="笑臉.jpg" alt="Appearance" class="profile">
+<img src="笑臉.jpg" class="profile">
 
 <h2>這是他的行程表</h2>
 
@@ -120,6 +119,26 @@ Instagram帳號
     <td>Sleep</td>
   </tr>
 </table>
+
+<script>
+const ball = document.getElementById("ball");
+
+/* 點擊畫面擊球 */
+document.addEventListener("click", function(e) {
+  let x = e.clientX;
+  let y = window.innerHeight - e.clientY;
+
+  ball.style.left = x + "px";
+  ball.style.bottom = y + "px";
+
+  /* 加旋轉 */
+  ball.classList.add("spin");
+
+  setTimeout(() => {
+    ball.classList.remove("spin");
+  }, 500);
+});
+</script>
 
 </body>
 </html>
