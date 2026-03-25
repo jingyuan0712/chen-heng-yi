@@ -7,17 +7,52 @@
 <style>
 body {
   font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #74ebd5, #ACB6E5);
+  overflow-x: hidden;
 }
 
-img {
-  float: right;
-  width: 240px;
-  height: 360px;
+/* 排球動畫 */
+.ball {
+  position: fixed;
+  width: 80px;
+  bottom: 0;
+  left: 0;
+  animation: moveBall 6s linear infinite;
+  opacity: 0.8;
+  z-index: -1;
 }
 
+.ball2 {
+  animation-delay: 3s;
+}
+
+/* 動畫軌跡 */
+@keyframes moveBall {
+  0% {
+    left: 0;
+    bottom: 0;
+  }
+  25% {
+    bottom: 200px;
+  }
+  50% {
+    left: 50%;
+    bottom: 0;
+  }
+  75% {
+    bottom: 200px;
+  }
+  100% {
+    left: 100%;
+    bottom: 0;
+  }
+}
+
+/* 表格樣式 */
 table {
   border-collapse: collapse;
   width: 100%;
+  background-color: rgba(255, 255, 255, 0.8); /* 半透明 */
 }
 
 th, td {
@@ -25,11 +60,22 @@ th, td {
   padding: 15px;
   text-align: left;
 }
+
+/* 圖片 */
+img.profile {
+  float: right;
+  width: 240px;
+  height: 360px;
+}
 </style>
 
 </head>
 
 <body>
+
+<!-- 會動的排球 -->
+<img src="volleyball.png" class="ball">
+<img src="volleyball.png" class="ball ball2">
 
 <h1>這是陳衡毅熊男</h1>
 
@@ -39,7 +85,7 @@ Instagram帳號
 
 <br><br>
 
-<img src="笑臉.jpg" alt="Appearance">
+<img src="笑臉.jpg" alt="Appearance" class="profile">
 
 <h2>這是他的行程表</h2>
 
